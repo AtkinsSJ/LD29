@@ -106,7 +106,7 @@ public class SwanControllerComponent extends ControllerComponent {
 
         thighJoint = (RevoluteJoint) world.createJoint(thighJointDef);
 
-        // Lower half of first leg
+        // Foot
         BodyDef footDef = new BodyDef();
         footDef.type = BodyDef.BodyType.DynamicBody;
         footDef.position.set(x+2f, y- thighLength);
@@ -114,14 +114,14 @@ public class SwanControllerComponent extends ControllerComponent {
         shape.setAsBox(2.5f, 5f, new Vector2(0, -5f), 0);
         footBody.createFixture(thighFD);
 
-        // Leg/foot joint
+        // Knee joint
         RevoluteJointDef kneeJointDef = new RevoluteJointDef();
         kneeJointDef.initialize(thighBody, footBody, new Vector2(x, y- thighLength));
         kneeJointDef.enableMotor = true;
         kneeJointDef.maxMotorTorque = 5000000f;
         kneeJointDef.enableLimit = true;
-        kneeJointDef.lowerAngle = -MathUtils.PI;
-        kneeJointDef.upperAngle = 0;
+        kneeJointDef.lowerAngle = 0;
+        kneeJointDef.upperAngle = MathUtils.PI;
 
         kneeJoint = (RevoluteJoint) world.createJoint(kneeJointDef);
 
