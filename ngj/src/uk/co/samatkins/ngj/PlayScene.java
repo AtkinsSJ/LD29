@@ -12,6 +12,9 @@ import uk.co.samatkins.components.graphics.SpriteComponent;
  * Scene for actually playing the game
  */
 public class PlayScene extends Scene<NGJGame> {
+    public static final String endFixtureID = "End",
+                                playerFixtureID = "Player";
+
     private World world;
     private Box2DDebugRenderer debugRenderer;
     public static final float TIME_STEP = 1f / 30f;
@@ -52,7 +55,8 @@ public class PlayScene extends Scene<NGJGame> {
         shape.setAsBox(halfWallThickness, halfWorldHeight, new Vector2(-halfWorldWidth- halfWallThickness, halfWorldHeight), 0);
         groundBody.createFixture(shape, 0);
         shape.setAsBox(halfWallThickness, halfWorldHeight, new Vector2(halfWorldWidth+ halfWallThickness, halfWorldHeight), 0);
-        groundBody.createFixture(shape, 0);
+        Fixture endLine = groundBody.createFixture(shape, 0);
+        endLine.setUserData(endFixtureID);
 
         shape.dispose();
 
@@ -148,6 +152,14 @@ public class PlayScene extends Scene<NGJGame> {
         this.debugRenderer.render(world, getCamera().combined.scl(2));
         getCamera().combined.scl(0.5f);
         fpsLogger.log();
+
+    }
+
+    public void gameWon() {
+
+    }
+
+    public void gameLost() {
 
     }
 
