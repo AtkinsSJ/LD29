@@ -56,7 +56,7 @@ public class PlayScene extends Scene<NGJGame> {
 
         shape.dispose();
 
-        createWater(-halfWorldWidth, halfWallThickness, halfWorldWidth*2, 60, 10);
+        createWater(-halfWorldWidth, halfWallThickness, halfWorldWidth*2, 60, 8);
         createSwan(-halfWorldWidth+50, 100);
     }
 
@@ -80,14 +80,19 @@ public class PlayScene extends Scene<NGJGame> {
 
         float diameter = particleRadius * 2;
         int across = (int) (width/diameter),
-            up = (int)(height/diameter);
+            up = (int) Math.ceil(height/diameter);
+
+        float oddOffset = width % diameter;
+        float bodyY;
 
         for (int iy=0; iy<up; iy++) {
+            bodyY = ((0.5f + iy) * diameter) + y;
             for (int ix=0; ix<across; ix++) {
                 BodyDef bodyDef = new BodyDef();
                 bodyDef.type = BodyDef.BodyType.DynamicBody;
                 bodyDef.position.x = ((0.5f + ix) * diameter) + x;
-                bodyDef.position.y = ((0.5f + iy) * diameter) + y;
+                if (iy % 2 == 1) bodyDef.position.x += oddOffset;
+                bodyDef.position.y = bodyY;
 
                 Body body = world.createBody(bodyDef);
                 body.createFixture(fixtureDef);
