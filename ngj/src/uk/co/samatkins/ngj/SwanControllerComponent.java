@@ -71,11 +71,15 @@ public class SwanControllerComponent extends ControllerComponent {
         swanBody = world.createBody(swanBodyDef);
         PolygonShape shape = new PolygonShape();
 
-        shape.setAsBox(30, 15, new Vector2(0, 10), 0);
+        shape.setAsBox(18.5f, 12.75f, new Vector2(-11.5f, 7.75f), 0);
         FixtureDef swanFixtureDef = new FixtureDef();
         swanFixtureDef.shape = shape;
         swanFixtureDef.filter.groupIndex = -1;
         swanFixtureDef.density = 8f;
+        swanBody.createFixture(swanFixtureDef);
+
+        shape.setAsBox(11.5f, 25.5f, new Vector2(18.5f, 20.5f), 0);
+        swanFixtureDef.density = 2;
         swanBody.createFixture(swanFixtureDef);
 
         // First leg!
