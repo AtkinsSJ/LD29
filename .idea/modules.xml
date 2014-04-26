@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../AtkinsLib/AtkinsLib.iml" filepath="$PROJECT_DIR$/../AtkinsLib/AtkinsLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj/ngj.iml" filepath="$PROJECT_DIR$/ngj/ngj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj-android/ngj-android.iml" filepath="$PROJECT_DIR$/ngj-android/ngj-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj-desktop/ngj-desktop.iml" filepath="$PROJECT_DIR$/ngj-desktop/ngj-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj-html/ngj-html.iml" filepath="$PROJECT_DIR$/ngj-html/ngj-html.iml" />
+    </modules>
+  </component>
+</project>
+

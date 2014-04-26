@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="desktop-libs">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ngj-desktop/libs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/ngj-desktop/libs" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/ngj-desktop/libs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/ngj-desktop/libs" recursive="false" type="SOURCES" />
+  </library>
+</component>

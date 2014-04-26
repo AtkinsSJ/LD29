@@ -1,0 +1,27 @@
+{
+	com.badlogic.gdx.graphics.g2d.BitmapFont: {
+		default-font: { file: dejavu-32.fnt }
+	},
+	
+	com.badlogic.gdx.graphics.Color: {
+		white: { r: 1, g: 1, b: 1, a: 1 },
+		black: { r: 0, g: 0, b: 0, a: 1 }
+	},
+	
+	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+		default: {
+			font: default-font,
+			fontColor: white
+		}
+	},
+	
+	uk.co.samatkins.ui.ExtendedButton$ExtendedButtonStyle: {
+		default: {
+			font: default-font,
+			fontColor: black,
+			up: button,
+			down: button,
+			checked: button
+		}
+	}
+}
