@@ -37,6 +37,9 @@ public class PlayScene extends Scene<NGJGame> {
     private FPSLogger fpsLogger;
     private Entity swanEntity;
 
+    private boolean gameOver = false;
+    private float timeTaken = 0;
+
     private static final boolean DRAW_DEBUG = false;
     private float halfWorldWidth;
     private float halfWorldHeight;
@@ -68,7 +71,8 @@ public class PlayScene extends Scene<NGJGame> {
         Label instructionsLabel = new Label("INSTRUCTIONS:\n" +
                 "Cross the lake!\n" +
                 "Q and W to bend hip\n" +
-                "O and P to bend knee",
+                "O and P to bend knee\n" +
+                "Escape to restart",
                 game.getSkin(), "white"
         );
         instructionsLabel.setPosition(-halfWorldWidth *2, 260);
@@ -164,6 +168,7 @@ public class PlayScene extends Scene<NGJGame> {
     @Override
     public void act(float delta) {
         super.act(delta);
+        timeTaken += delta;
 
         // Basic physics loop
         physicsCounter += delta;
@@ -172,8 +177,13 @@ public class PlayScene extends Scene<NGJGame> {
             physicsCounter -= TIME_STEP;
         }
 
-        if (Gdx.input.justTouched()) {
-            gameLost();
+        if (!gameOver) {
+            if (Gdx.input.justTouched()) {
+                gameWon();
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                gameLost();
+            }
         }
     }
 
@@ -221,6 +231,7 @@ public class PlayScene extends Scene<NGJGame> {
 
     private void showGameOverWindow(boolean won) {
         swanEntity.pause();
+        gameOver = true;
 
         Skin skin = game.getSkin();
         Rectangle cameraRect = getCameraRect();
@@ -235,11 +246,11 @@ public class PlayScene extends Scene<NGJGame> {
         if (won) {
             table.add("You won!").row();
             table.add("It only took you:").row();
-            table.add("X seconds").row();
+            table.add(timeTaken + " seconds").row();
             table.add("to cross the lake!").row();
             table.add("But could you do better?").row();
         } else {
-            table.add("You drowned!").row();
+            table.add("You failed!").row();
             table.add("Better luck next time?").row();
         }
         ExtendedButton retryButton = new ExtendedButton("Try again", skin);
