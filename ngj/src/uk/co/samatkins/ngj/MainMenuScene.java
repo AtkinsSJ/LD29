@@ -10,9 +10,9 @@ import uk.co.samatkins.ui.ExtendedButton;
 /**
  * Very basic main menu
  */
-public class MainMenuScene extends Scene<NGJGame> {
+public class MainMenuScene extends Scene<SwanGame> {
 
-    public MainMenuScene(final NGJGame game) {
+    public MainMenuScene(final SwanGame game) {
         super(game);
 
         Skin skin = game.getSkin();

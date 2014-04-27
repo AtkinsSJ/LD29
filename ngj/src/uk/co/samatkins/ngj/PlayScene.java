@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import uk.co.samatkins.AudioManager;
 import uk.co.samatkins.Entity;
 import uk.co.samatkins.Scene;
 import uk.co.samatkins.components.graphics.SpriteComponent;
@@ -21,9 +22,10 @@ import uk.co.samatkins.ui.ExtendedButton;
 /**
  * Scene for actually playing the game
  */
-public class PlayScene extends Scene<NGJGame> {
+public class PlayScene extends Scene<SwanGame> {
     public static final String endFixtureID = "End",
-                                playerFixtureID = "Player";
+                                playerFixtureID = "Player",
+                                waterFixtureID = "Water";
     public static final Color SKY_COLOR = Color.valueOf("5BCEFF"),
                             GRASS_COLOR = Color.valueOf("5BCE00"),
                             WATER_COLOR = Color.valueOf("3A5EFF");
@@ -44,12 +46,13 @@ public class PlayScene extends Scene<NGJGame> {
     private float halfWorldWidth;
     private float halfWorldHeight;
 
-    public PlayScene(NGJGame game) {
+    public PlayScene(SwanGame game) {
         super(game);
         Gdx.gl.glClearColor(SKY_COLOR.r, SKY_COLOR.g, SKY_COLOR.b, 1f);
         this.fpsLogger = new FPSLogger();
 
         this.world = new World(new Vector2(0, -10), true);
+        this.world.setContactListener(new SwanContactListener(this));
         if (DRAW_DEBUG) {
             this.debugRenderer = new Box2DDebugRenderer();
         }
@@ -137,7 +140,7 @@ public class PlayScene extends Scene<NGJGame> {
                 bodyDef.position.y = bodyY;
 
                 Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
+                body.createFixture(fixtureDef).setUserData(waterFixtureID);
                 waterBodies.add(body);
             }
         }
@@ -267,6 +270,10 @@ public class PlayScene extends Scene<NGJGame> {
         table.center();
         entity.addActor(table);
         setKeyboardFocus(entity);
+    }
+
+    public void splash() {
+        AudioManager.playSound("splash1");
     }
 
     @Override

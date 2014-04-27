@@ -20,6 +20,8 @@ public class SwanContactListener implements com.badlogic.gdx.physics.box2d.Conta
     public void beginContact(Contact contact) {
         if (collisionIsPlayerEnd(contact)) {
             playScene.gameWon();
+        } else if (collisionIsPlayerWater(contact)) {
+            playScene.splash();
         }
     }
 
@@ -29,6 +31,18 @@ public class SwanContactListener implements com.badlogic.gdx.physics.box2d.Conta
             return true;
         }
         if (PlayScene.endFixtureID.equals(contact.getFixtureB().getUserData())
+            && PlayScene.playerFixtureID.equals(contact.getFixtureA().getUserData())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean collisionIsPlayerWater(Contact contact) {
+        if (PlayScene.waterFixtureID.equals(contact.getFixtureA().getUserData())
+            && PlayScene.playerFixtureID.equals(contact.getFixtureB().getUserData())) {
+            return true;
+        }
+        if (PlayScene.waterFixtureID.equals(contact.getFixtureB().getUserData())
             && PlayScene.playerFixtureID.equals(contact.getFixtureA().getUserData())) {
             return true;
         }

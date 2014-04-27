@@ -89,7 +89,7 @@ public class SwanControllerComponent extends ControllerComponent {
         };
         offsetVertices(vertices, offset);
         shape.set(vertices);
-        swanBody.createFixture(swanFixtureDef);
+        swanBody.createFixture(swanFixtureDef).setUserData(PlayScene.playerFixtureID);
 
         // Neck
         vertices = new float[] {
@@ -100,7 +100,7 @@ public class SwanControllerComponent extends ControllerComponent {
         };
         offsetVertices(vertices, offset);
         shape.set(vertices);
-        swanBody.createFixture(swanFixtureDef);
+        swanBody.createFixture(swanFixtureDef).setUserData(PlayScene.playerFixtureID);
 
         // Head
         vertices = new float[] {
@@ -111,7 +111,7 @@ public class SwanControllerComponent extends ControllerComponent {
         };
         offsetVertices(vertices, offset);
         shape.set(vertices);
-        swanBody.createFixture(swanFixtureDef);
+        swanBody.createFixture(swanFixtureDef).setUserData(PlayScene.playerFixtureID);
 
         // First leg!
         BodyDef thighDef = new BodyDef();
@@ -124,7 +124,7 @@ public class SwanControllerComponent extends ControllerComponent {
         thighFD.shape = shape;
         thighFD.density = 2f;
         thighFD.filter.groupIndex = -1;
-        thighBody.createFixture(thighFD);
+        thighBody.createFixture(thighFD).setUserData(PlayScene.playerFixtureID);
 
         // Body/leg joint
         RevoluteJointDef thighJointDef = new RevoluteJointDef();
@@ -143,7 +143,7 @@ public class SwanControllerComponent extends ControllerComponent {
         footDef.position.set(x+2f, y- thighLength);
         footBody = world.createBody(footDef);
         shape.setAsBox(2.5f, 5f, new Vector2(0, -5f), 0);
-        footBody.createFixture(thighFD);
+        footBody.createFixture(thighFD).setUserData(PlayScene.playerFixtureID);
 
         // Knee joint
         RevoluteJointDef kneeJointDef = new RevoluteJointDef();

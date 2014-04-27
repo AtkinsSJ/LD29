@@ -11,6 +11,6 @@ public class Main {
 		cfg.width = 640;
 		cfg.height = 480;
 		
-		new LwjglApplication(new NGJGame(), cfg);
+		new LwjglApplication(new SwanGame(), cfg);
 	}
 }

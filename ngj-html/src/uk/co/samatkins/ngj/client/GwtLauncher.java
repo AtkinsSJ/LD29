@@ -1,6 +1,6 @@
 package uk.co.samatkins.ngj.client;
 
-import uk.co.samatkins.ngj.NGJGame;
+import uk.co.samatkins.ngj.SwanGame;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
@@ -14,6 +14,6 @@ public class GwtLauncher extends GwtApplication {
 
 	@Override
 	public ApplicationListener getApplicationListener () {
-		return new NGJGame();
+		return new SwanGame();
 	}
 }
