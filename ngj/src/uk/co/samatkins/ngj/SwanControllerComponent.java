@@ -26,9 +26,12 @@ public class SwanControllerComponent extends ControllerComponent {
     private Body thighBody;
     private Body footBody;
     private float thighLength;
+    private Vector2 legOffset;
 
     public SwanControllerComponent(World world) {
         this.world = world;
+        legOffset = new Vector2(-10,0);
+        thighLength = 8;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class SwanControllerComponent extends ControllerComponent {
         buildBodies();
 
         legEntity = new Entity(
-                0,0,
+                legOffset.x*2,legOffset.y*2,
                 new SpriteComponent(
                         scene.getGame().getSkin().getRegion("leg"),
                         new Vector2(-4, -thighLength*2)
@@ -57,7 +60,6 @@ public class SwanControllerComponent extends ControllerComponent {
     }
 
     private void buildBodies() {
-        thighLength = 16;
 
         // Swan torso/whatever
         BodyDef swanBodyDef = new BodyDef();
@@ -115,7 +117,7 @@ public class SwanControllerComponent extends ControllerComponent {
         // First leg!
         BodyDef thighDef = new BodyDef();
         thighDef.type = BodyDef.BodyType.DynamicBody;
-        thighDef.position.set(x, y);
+        thighDef.position.set(x+ legOffset.x, y+ legOffset.y);
         thighBody = world.createBody(thighDef);
 
         shape.setAsBox(2, thighLength/2f, new Vector2(0, -thighLength/2), 0);
@@ -127,7 +129,7 @@ public class SwanControllerComponent extends ControllerComponent {
 
         // Body/leg joint
         RevoluteJointDef thighJointDef = new RevoluteJointDef();
-        thighJointDef.initialize(swanBody, thighBody, new Vector2(x,y));
+        thighJointDef.initialize(swanBody, thighBody, new Vector2(x+ legOffset.x,y+ legOffset.y));
         thighJointDef.enableMotor = true;
         thighJointDef.maxMotorTorque = 5000000f;
         thighJointDef.enableLimit = true;
@@ -139,14 +141,14 @@ public class SwanControllerComponent extends ControllerComponent {
         // Foot
         BodyDef footDef = new BodyDef();
         footDef.type = BodyDef.BodyType.DynamicBody;
-        footDef.position.set(x+2f, y- thighLength);
+        footDef.position.set(x+ legOffset.x+2f, y+ legOffset.y-thighLength);
         footBody = world.createBody(footDef);
         shape.setAsBox(2.5f, 5f, new Vector2(0, -5f), 0);
         footBody.createFixture(thighFD).setUserData(PlayScene.playerFixtureID);
 
         // Knee joint
         RevoluteJointDef kneeJointDef = new RevoluteJointDef();
-        kneeJointDef.initialize(thighBody, footBody, new Vector2(x, y- thighLength));
+        kneeJointDef.initialize(thighBody, footBody, new Vector2(x+ legOffset.x, y+ legOffset.y-thighLength));
         kneeJointDef.enableMotor = true;
         kneeJointDef.maxMotorTorque = 5000000f;
         kneeJointDef.enableLimit = true;
