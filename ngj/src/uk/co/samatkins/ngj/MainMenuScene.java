@@ -1,6 +1,7 @@
 package uk.co.samatkins.ngj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import uk.co.samatkins.Scene;
@@ -31,7 +32,7 @@ public class MainMenuScene extends Scene<NGJGame> {
         table.add("beneath the surface!\"", "white").row();
 
         ExtendedButton playButton = new ExtendedButton("Play", skin);
-        playButton.setShortcut(' ');
+        playButton.setShortcuts(new char[]{' ', Input.Keys.ENTER});
         playButton.setListener(new ExtendedButton.ButtonListener() {
             @Override
             public void triggered() {
@@ -42,6 +43,8 @@ public class MainMenuScene extends Scene<NGJGame> {
 
         table.add("Guide Derek the one-legged swan", "white").row();
         table.add("across the lake!", "white").row();
+
+        setKeyboardFocus(table);
     }
 
     @Override

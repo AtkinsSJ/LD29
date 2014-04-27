@@ -1,6 +1,7 @@
 package uk.co.samatkins.ngj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -242,7 +243,7 @@ public class PlayScene extends Scene<NGJGame> {
             table.add("Better luck next time?").row();
         }
         ExtendedButton retryButton = new ExtendedButton("Try again", skin);
-        retryButton.setShortcut(' ');
+        retryButton.setShortcuts(new char[]{' ', Input.Keys.ENTER});
         retryButton.setListener(new ExtendedButton.ButtonListener() {
             @Override
             public void triggered() {
@@ -254,6 +255,7 @@ public class PlayScene extends Scene<NGJGame> {
         table.setFillParent(true);
         table.center();
         entity.addActor(table);
+        setKeyboardFocus(entity);
     }
 
     @Override
