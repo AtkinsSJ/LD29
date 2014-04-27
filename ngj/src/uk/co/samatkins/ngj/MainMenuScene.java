@@ -22,7 +22,13 @@ public class MainMenuScene extends Scene<NGJGame> {
         addActor(table);
         table.pack();
 
-        table.add("Ludum Dare 29").row();
+        table.defaults().center();
+
+        table.add("Ludum Dare 29:", "white").row();
+        table.add("SWAN QWOP", "white").row();
+        table.add("\"Like a swan - calm above water,", "white").row();
+        table.add("but working its legs off", "white").row();
+        table.add("beneath the surface!\"", "white").row();
 
         ExtendedButton playButton = new ExtendedButton("Play", skin);
         playButton.setShortcut(' ');
@@ -33,6 +39,9 @@ public class MainMenuScene extends Scene<NGJGame> {
             }
         });
         table.add(playButton).row();
+
+        table.add("Guide Derek the one-legged swan", "white").row();
+        table.add("across the lake!", "white").row();
     }
 
     @Override

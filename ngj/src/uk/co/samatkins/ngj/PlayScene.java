@@ -8,10 +8,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import uk.co.samatkins.Entity;
 import uk.co.samatkins.Scene;
 import uk.co.samatkins.components.graphics.SpriteComponent;
+import uk.co.samatkins.geom.Rectangle;
+import uk.co.samatkins.ui.ExtendedButton;
 
 /**
  * Scene for actually playing the game
@@ -63,7 +67,8 @@ public class PlayScene extends Scene<NGJGame> {
         Label instructionsLabel = new Label("INSTRUCTIONS:\n" +
                 "Cross the lake!\n" +
                 "Q and W to bend hip\n" +
-                "O and P to bend knee", game.getSkin()
+                "O and P to bend knee",
+                game.getSkin(), "white"
         );
         instructionsLabel.setPosition(-halfWorldWidth *2, 260);
         addActor(instructionsLabel);
@@ -165,6 +170,10 @@ public class PlayScene extends Scene<NGJGame> {
             world.step(TIME_STEP, 6, 2);
             physicsCounter -= TIME_STEP;
         }
+
+        if (Gdx.input.justTouched()) {
+            gameLost();
+        }
     }
 
     @Override
@@ -202,11 +211,49 @@ public class PlayScene extends Scene<NGJGame> {
     }
 
     public void gameWon() {
-
+        showGameOverWindow(true);
     }
 
     public void gameLost() {
+        showGameOverWindow(false);
+    }
 
+    private void showGameOverWindow(boolean won) {
+        swanEntity.pause();
+
+        Skin skin = game.getSkin();
+        Rectangle cameraRect = getCameraRect();
+        Entity entity = new Entity(
+                cameraRect.getLeft(), cameraRect.getBottom(),
+                null, null, null
+        );
+        entity.setSize(cameraRect.getWidth(), cameraRect.getHeight());
+        addEntity(entity);
+
+        Table table = new Table(skin);
+        if (won) {
+            table.add("You won!").row();
+            table.add("It only took you:").row();
+            table.add("X seconds").row();
+            table.add("to cross the lake!").row();
+            table.add("But could you do better?").row();
+        } else {
+            table.add("You drowned!").row();
+            table.add("Better luck next time?").row();
+        }
+        ExtendedButton retryButton = new ExtendedButton("Try again", skin);
+        retryButton.setShortcut(' ');
+        retryButton.setListener(new ExtendedButton.ButtonListener() {
+            @Override
+            public void triggered() {
+                game.setScene(new PlayScene(game));
+            }
+        });
+        table.add(retryButton);
+        table.pack();
+        table.setFillParent(true);
+        table.center();
+        entity.addActor(table);
     }
 
     @Override

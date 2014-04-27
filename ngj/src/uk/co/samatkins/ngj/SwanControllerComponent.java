@@ -184,10 +184,6 @@ public class SwanControllerComponent extends ControllerComponent {
             kneeJoint.setMotorSpeed(0);
         }
 
-        if (Gdx.input.justTouched()) {
-            swanBody.setTransform(startX, startY, 0);
-        }
-
         // Position body visually
         entity.setPosition(swanBody.getPosition().x*2, swanBody.getPosition().y*2);
         float swanAngle = swanBody.getAngle() * MathUtils.radiansToDegrees,
