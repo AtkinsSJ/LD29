@@ -71,15 +71,46 @@ public class SwanControllerComponent extends ControllerComponent {
         swanBody = world.createBody(swanBodyDef);
         PolygonShape shape = new PolygonShape();
 
-        shape.setAsBox(18.5f, 12.75f, new Vector2(-11.5f, 7.75f), 0);
         FixtureDef swanFixtureDef = new FixtureDef();
         swanFixtureDef.shape = shape;
         swanFixtureDef.filter.groupIndex = -1;
         swanFixtureDef.density = 8f;
+
+        // Torso
+        Vector2 offset = new Vector2(-30f, -5f);
+        float[] vertices = {
+                0, 14,
+                14, 0,
+                51, 0,
+                58, 7,
+                58, 15,
+                37, 25,
+                10, 25
+        };
+        offsetVertices(vertices, offset);
+        shape.set(vertices);
         swanBody.createFixture(swanFixtureDef);
 
-        shape.setAsBox(11.5f, 25.5f, new Vector2(18.5f, 20.5f), 0);
-        swanFixtureDef.density = 2;
+        // Neck
+        vertices = new float[] {
+                46,20,
+                58,15,
+                43,41,
+                36,41
+        };
+        offsetVertices(vertices, offset);
+        shape.set(vertices);
+        swanBody.createFixture(swanFixtureDef);
+
+        // Head
+        vertices = new float[] {
+                36,41,
+                59,41,
+                50,51,
+                41,51
+        };
+        offsetVertices(vertices, offset);
+        shape.set(vertices);
         swanBody.createFixture(swanFixtureDef);
 
         // First leg!
@@ -126,6 +157,13 @@ public class SwanControllerComponent extends ControllerComponent {
         kneeJoint = (RevoluteJoint) world.createJoint(kneeJointDef);
 
         shape.dispose();
+    }
+
+    private void offsetVertices(float[] vertices, Vector2 offset) {
+        for (int i=0; i<vertices.length; i+=2) {
+            vertices[i] += offset.x;
+            vertices[i+1] += offset.y;
+        }
     }
 
     @Override

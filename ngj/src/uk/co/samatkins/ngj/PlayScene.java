@@ -123,19 +123,12 @@ public class PlayScene extends Scene<NGJGame> {
                 null
         );
         swanEntity.setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
-//        swanEntity.setOrigin(30, 30);
         addEntity(swanEntity);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
-//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-//            getCamera().position.x -= 100 * delta;
-//        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-//            getCamera().position.x += 100 * delta;
-//        }
 
         // Basic physics loop
         physicsCounter += delta;
