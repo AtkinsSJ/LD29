@@ -42,7 +42,9 @@ public class PlayScene extends Scene<NGJGame> {
         this.fpsLogger = new FPSLogger();
 
         this.world = new World(new Vector2(0, -10), true);
-        this.debugRenderer = new Box2DDebugRenderer();
+        if (DRAW_DEBUG) {
+            this.debugRenderer = new Box2DDebugRenderer();
+        }
 
         buildWorld();
     }
