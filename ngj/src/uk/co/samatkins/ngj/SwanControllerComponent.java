@@ -23,7 +23,6 @@ public class SwanControllerComponent extends ControllerComponent {
 
     private Entity legEntity, footEntity;
 
-    private float startX, startY;
     private Body thighBody;
     private Body footBody;
     private float thighLength;
@@ -36,8 +35,6 @@ public class SwanControllerComponent extends ControllerComponent {
     public void onAddedToScene(Scene scene) {
         super.onAddedToScene(scene);
         buildBodies();
-        startX = entity.getX();
-        startY = entity.getY();
 
         legEntity = new Entity(
                 0,0,

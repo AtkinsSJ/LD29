@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-import uk.co.samatkins.AudioManager;
 import uk.co.samatkins.Entity;
 import uk.co.samatkins.Scene;
 import uk.co.samatkins.components.graphics.SpriteComponent;
@@ -25,6 +24,8 @@ import uk.co.samatkins.ui.ExtendedButton;
 public class PlayScene extends Scene<SwanGame> {
     public static final String endFixtureID = "End",
                                 playerFixtureID = "Player",
+                                frogFixtureID = "Frog",
+                                duckFixtureID = "Duck",
                                 waterFixtureID = "Water";
     public static final Color SKY_COLOR = Color.valueOf("5BCEFF"),
                             GRASS_COLOR = Color.valueOf("5BCE00"),
@@ -37,7 +38,7 @@ public class PlayScene extends Scene<SwanGame> {
     public static final float TIME_STEP = 1f / 30f;
     private float physicsCounter = 0;
     private FPSLogger fpsLogger;
-    private Entity swanEntity;
+    private Entity entity;
 
     private boolean gameOver = false;
     private float timeTaken = 0;
@@ -100,6 +101,7 @@ public class PlayScene extends Scene<SwanGame> {
 
         createWater(-halfWorldWidth, halfWallThickness, halfWorldWidth *2, 60, 8);
         createSwan(-halfWorldWidth +50, 100);
+        createDecorations(-halfWorldWidth, 80, halfWorldWidth*2);
     }
 
     /**
@@ -155,7 +157,7 @@ public class PlayScene extends Scene<SwanGame> {
      */
     private void createSwan(float x, float y) {
         TextureRegion textureRegion = game.getSkin().getRegion("swan");
-        swanEntity = new Entity(
+        entity = new Entity(
                 x, y,
                 new SpriteComponent(
                         textureRegion,
@@ -164,8 +166,40 @@ public class PlayScene extends Scene<SwanGame> {
                 new SwanControllerComponent(world),
                 null
         );
-        swanEntity.setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
-        addEntity(swanEntity);
+        entity.setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        addEntity(entity);
+    }
+
+    private void createDecorations(float x, float y, float width) {
+
+        CircleShape shape = new CircleShape();
+        shape.setRadius(8);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 2f;
+        fixtureDef.friction = 0.1f;
+        fixtureDef.restitution = 0.6f;
+
+        TextureRegion textureRegion = game.getSkin().getRegion("frog");
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.x = x + (width/3f);
+        bodyDef.position.y = y;
+
+        Body body = world.createBody(bodyDef);
+        body.createFixture(fixtureDef).setUserData(frogFixtureID);
+
+        Entity entity = new Entity(
+                x, y,
+                new SpriteComponent(
+                        textureRegion,
+                        true, true
+                ),
+                new DecorationController(body),
+                null
+        );
+        entity.setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        addEntity(entity);
     }
 
     @Override
@@ -192,7 +226,7 @@ public class PlayScene extends Scene<SwanGame> {
 
     @Override
     public void draw() {
-        getCamera().position.set(swanEntity.getX(), swanEntity.getY(), 0);
+        getCamera().position.set(entity.getX(), entity.getY(), 0);
 
         // Draw background and water
         ShapeRenderer shapeRenderer = getShapeRenderer();
@@ -233,7 +267,7 @@ public class PlayScene extends Scene<SwanGame> {
     }
 
     private void showGameOverWindow(boolean won) {
-        swanEntity.pause();
+        entity.pause();
         gameOver = true;
 
         Skin skin = game.getSkin();
@@ -273,7 +307,7 @@ public class PlayScene extends Scene<SwanGame> {
     }
 
     public void splash() {
-        AudioManager.playSound("splash1");
+//        AudioManager.playSound("splash1");
     }
 
     @Override
