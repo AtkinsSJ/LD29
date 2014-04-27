@@ -97,6 +97,7 @@ public class SwanControllerComponent extends ControllerComponent {
         };
         offsetVertices(vertices, offset);
         shape.set(vertices);
+        swanFixtureDef.density = 6f;
         swanBody.createFixture(swanFixtureDef).setUserData(PlayScene.playerFixtureID);
 
         // Head
@@ -108,6 +109,7 @@ public class SwanControllerComponent extends ControllerComponent {
         };
         offsetVertices(vertices, offset);
         shape.set(vertices);
+        swanFixtureDef.density = 6f;
         swanBody.createFixture(swanFixtureDef).setUserData(PlayScene.playerFixtureID);
 
         // First leg!

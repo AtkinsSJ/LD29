@@ -284,7 +284,8 @@ public class PlayScene extends Scene<SwanGame> {
     }
 
     public void gameLost() {
-        showGameOverWindow(false);
+        game.setScene(new PlayScene(game));
+//        showGameOverWindow(false);
     }
 
     private void showGameOverWindow(boolean won) {
