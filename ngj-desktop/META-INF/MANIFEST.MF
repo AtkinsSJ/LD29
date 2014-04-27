@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ gdx-natives.jar gdx.jar gdx-backend-lwjgl.jar gdx-freet
+ ype-natives.jar gdx-backend-lwjgl-natives.jar
+Class-Path: .
+Rsrc-Main-Class: uk.co.samatkins.ld29.Main
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+

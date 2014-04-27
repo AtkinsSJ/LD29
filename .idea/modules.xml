@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/ngj/ld29.iml" filepath="$PROJECT_DIR$/ngj/ld29.iml" />
       <module fileurl="file://$PROJECT_DIR$/ngj-android/ld29-android.iml" filepath="$PROJECT_DIR$/ngj-android/ld29-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/ngj-desktop/ld29-desktop.iml" filepath="$PROJECT_DIR$/ngj-desktop/ld29-desktop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ngj-html/ld29-html.iml" filepath="$PROJECT_DIR$/ngj-html/ld29-html.iml" />
     </modules>
   </component>
 </project>

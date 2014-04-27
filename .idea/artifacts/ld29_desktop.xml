@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ld29-desktop">
+    <output-path>$PROJECT_DIR$/out/artifacts/ld29_desktop</output-path>
+    <root id="archive" name="ld29-desktop.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/ngj-desktop/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="ld29-desktop" />
+      <element id="module-output" name="ld29" />
+      <element id="module-output" name="AtkinsLib" />
+      <element id="file-copy" path="$PROJECT_DIR$/ngj/libs/gdx.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/ngj-desktop/libs/gdx-natives.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/ngj-desktop/libs/gdx-backend-lwjgl.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/ngj-desktop/libs/gdx-backend-lwjgl-natives.jar" />
+      <element id="dir-copy" path="$PROJECT_DIR$/eclipse-gumph" />
+    </root>
+  </artifact>
+</component>
