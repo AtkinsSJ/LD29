@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import uk.co.samatkins.Entity;
 import uk.co.samatkins.Scene;
@@ -19,6 +20,7 @@ public class PlayScene extends Scene<NGJGame> {
     public static final String endFixtureID = "End",
                                 playerFixtureID = "Player";
     public static final Color SKY_COLOR = Color.valueOf("5BCEFF"),
+                            GRASS_COLOR = Color.valueOf("5BCE00"),
                             WATER_COLOR = Color.valueOf("3A5EFF");
 
     private World world;
@@ -30,7 +32,9 @@ public class PlayScene extends Scene<NGJGame> {
     private FPSLogger fpsLogger;
     private Entity swanEntity;
 
-    private static final boolean DRAW_DEBUG = true;
+    private static final boolean DRAW_DEBUG = false;
+    private float halfWorldWidth;
+    private float halfWorldHeight;
 
     public PlayScene(NGJGame game) {
         super(game);
@@ -50,9 +54,17 @@ public class PlayScene extends Scene<NGJGame> {
     }
 
     private void buildWorld() {
-        float halfWorldWidth = 300,
-              halfWorldHeight = 200;
+        halfWorldWidth = 300;
+        halfWorldHeight = 200;
         int halfWallThickness = 10;
+
+        Label instructionsLabel = new Label("INSTRUCTIONS:\n" +
+                "Cross the lake!\n" +
+                "Q and W to bend hip\n" +
+                "O and P to bend knee", game.getSkin()
+        );
+        instructionsLabel.setPosition(-halfWorldWidth *2, 260);
+        addActor(instructionsLabel);
 
         BodyDef groundBodyDef = new BodyDef();
         groundBodyDef.position.set(0, 0);
@@ -63,16 +75,16 @@ public class PlayScene extends Scene<NGJGame> {
         shape.setAsBox(halfWorldWidth, halfWallThickness);
         groundBody.createFixture(shape, 0);
 
-        shape.setAsBox(halfWallThickness, halfWorldHeight, new Vector2(-halfWorldWidth- halfWallThickness, halfWorldHeight), 0);
+        shape.setAsBox(halfWallThickness, halfWorldHeight, new Vector2(-halfWorldWidth - halfWallThickness, halfWorldHeight), 0);
         groundBody.createFixture(shape, 0);
-        shape.setAsBox(halfWallThickness, halfWorldHeight, new Vector2(halfWorldWidth+ halfWallThickness, halfWorldHeight), 0);
+        shape.setAsBox(halfWallThickness, halfWorldHeight, new Vector2(halfWorldWidth + halfWallThickness, halfWorldHeight), 0);
         Fixture endLine = groundBody.createFixture(shape, 0);
         endLine.setUserData(endFixtureID);
 
         shape.dispose();
 
-        createWater(-halfWorldWidth, halfWallThickness, halfWorldWidth*2, 60, 8);
-        createSwan(-halfWorldWidth+50, 100);
+        createWater(-halfWorldWidth, halfWallThickness, halfWorldWidth *2, 60, 8);
+        createSwan(-halfWorldWidth +50, 100);
     }
 
     /**
@@ -161,11 +173,19 @@ public class PlayScene extends Scene<NGJGame> {
         ShapeRenderer shapeRenderer = getShapeRenderer();
         shapeRenderer.setProjectionMatrix(getCamera().combined.scl(2));
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(WATER_COLOR);
 
+        shapeRenderer.setColor(WATER_COLOR);
         for (Body body: waterBodies) {
             shapeRenderer.circle(body.getPosition().x, body.getPosition().y, particleRadius);
         }
+
+        shapeRenderer.setColor(GRASS_COLOR);
+        float left = -halfWorldWidth,
+            bottom = -200,
+            lakeWidth = halfWorldWidth * 2;
+        shapeRenderer.rect(left, bottom, lakeWidth, 210);
+        shapeRenderer.rect(left-200, bottom, 200, 300);
+        shapeRenderer.rect(lakeWidth, bottom, 200, 300);
 
         shapeRenderer.end();
         getCamera().combined.scl(0.5f);
