@@ -280,12 +280,11 @@ public class PlayScene extends Scene<SwanGame> {
     }
 
     public void gameWon() {
-        showGameOverWindow(true);
+        if (!gameOver) showGameOverWindow(true);
     }
 
     public void gameLost() {
-        game.setScene(new PlayScene(game));
-//        showGameOverWindow(false);
+        if (!gameOver) game.setScene(new PlayScene(game));
     }
 
     private void showGameOverWindow(boolean won) {
@@ -326,10 +325,6 @@ public class PlayScene extends Scene<SwanGame> {
         table.center();
         entity.addActor(table);
         setKeyboardFocus(entity);
-    }
-
-    public void splash() {
-//        AudioManager.playSound("splash1");
     }
 
     @Override

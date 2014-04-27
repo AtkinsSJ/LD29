@@ -44,7 +44,7 @@ public class MainMenuScene extends Scene<SwanGame> {
         table.add("Guide Derek the one-legged swan", "white").row();
         table.add("across the lake!", "white").row();
 
-        setKeyboardFocus(table);
+        setKeyboardFocus(playButton);
     }
 
     @Override
