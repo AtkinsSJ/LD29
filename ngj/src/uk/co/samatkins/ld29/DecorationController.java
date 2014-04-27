@@ -1,4 +1,4 @@
-package uk.co.samatkins.ngj;
+package uk.co.samatkins.ld29;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;

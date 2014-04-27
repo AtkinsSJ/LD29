@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../AtkinsLib/AtkinsLib.iml" filepath="$PROJECT_DIR$/../AtkinsLib/AtkinsLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ngj/ngj.iml" filepath="$PROJECT_DIR$/ngj/ngj.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ngj-android/ngj-android.iml" filepath="$PROJECT_DIR$/ngj-android/ngj-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ngj-desktop/ngj-desktop.iml" filepath="$PROJECT_DIR$/ngj-desktop/ngj-desktop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ngj-html/ngj-html.iml" filepath="$PROJECT_DIR$/ngj-html/ngj-html.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj/ld29.iml" filepath="$PROJECT_DIR$/ngj/ld29.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj-android/ld29-android.iml" filepath="$PROJECT_DIR$/ngj-android/ld29-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj-desktop/ld29-desktop.iml" filepath="$PROJECT_DIR$/ngj-desktop/ld29-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngj-html/ld29-html.iml" filepath="$PROJECT_DIR$/ngj-html/ld29-html.iml" />
     </modules>
   </component>
 </project>

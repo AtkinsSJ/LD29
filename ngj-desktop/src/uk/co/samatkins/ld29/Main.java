@@ -1,4 +1,4 @@
-package uk.co.samatkins.ngj;
+package uk.co.samatkins.ld29;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;

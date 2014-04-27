@@ -17,7 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ngj" />
+    <orderEntry type="module" module-name="ld29" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library">
       <library name="gdx.jar">

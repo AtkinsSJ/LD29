@@ -1,6 +1,6 @@
-package uk.co.samatkins.ngj.client;
+package uk.co.samatkins.ld29.client;
 
-import uk.co.samatkins.ngj.SwanGame;
+import uk.co.samatkins.ld29.SwanGame;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;

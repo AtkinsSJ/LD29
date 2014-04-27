@@ -30,7 +30,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ngj" exported="" />
+    <orderEntry type="module" module-name="ld29" exported="" />
     <orderEntry type="library" name="android-libs" level="project" />
   </component>
 </module>

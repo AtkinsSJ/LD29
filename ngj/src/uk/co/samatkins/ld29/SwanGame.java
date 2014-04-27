@@ -1,4 +1,4 @@
-package uk.co.samatkins.ngj;
+package uk.co.samatkins.ld29;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
