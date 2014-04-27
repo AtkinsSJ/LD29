@@ -265,7 +265,7 @@ public class PlayScene extends Scene<SwanGame> {
             lakeWidth = halfWorldWidth * 2;
         shapeRenderer.rect(left, bottom, lakeWidth, 210);
         shapeRenderer.rect(left-200, bottom, 200, 300);
-        shapeRenderer.rect(lakeWidth, bottom, 200, 300);
+        shapeRenderer.rect(halfWorldWidth, bottom, 200, 300);
 
         shapeRenderer.end();
         getCamera().combined.scl(0.5f);
