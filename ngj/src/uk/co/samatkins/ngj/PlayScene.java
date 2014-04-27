@@ -236,9 +236,6 @@ public class PlayScene extends Scene<SwanGame> {
         }
 
         if (!gameOver) {
-            if (Gdx.input.justTouched()) {
-                gameWon();
-            }
             if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
                 gameLost();
             }
