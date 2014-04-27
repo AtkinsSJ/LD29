@@ -3,10 +3,8 @@ package uk.co.samatkins.ngj;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import uk.co.samatkins.AudioManager;
 
-/**
- * Created by Sam on 26/04/14.
- */
 public class SwanContactListener implements com.badlogic.gdx.physics.box2d.ContactListener {
 
     private PlayScene playScene;
@@ -18,32 +16,22 @@ public class SwanContactListener implements com.badlogic.gdx.physics.box2d.Conta
 
     @Override
     public void beginContact(Contact contact) {
-        if (collisionIsPlayerEnd(contact)) {
+        if (contactBetween(PlayScene.playerFixtureID, PlayScene.endFixtureID, contact)) {
             playScene.gameWon();
-        } else if (collisionIsPlayerWater(contact)) {
-            playScene.splash();
+        } else if (contactBetween(PlayScene.playerFixtureID, PlayScene.duckFixtureID, contact)) {
+            AudioManager.playSound("quack");
+        } else if (contactBetween(PlayScene.playerFixtureID, PlayScene.frogFixtureID, contact)) {
+            AudioManager.playSound("ribbit");
         }
     }
 
-    private boolean collisionIsPlayerEnd(Contact contact) {
-        if (PlayScene.endFixtureID.equals(contact.getFixtureA().getUserData())
-            && PlayScene.playerFixtureID.equals(contact.getFixtureB().getUserData())) {
+    private boolean contactBetween(String a, String b, Contact contact) {
+        if (a.equals(contact.getFixtureA().getUserData())
+                && b.equals(contact.getFixtureB().getUserData())) {
             return true;
         }
-        if (PlayScene.endFixtureID.equals(contact.getFixtureB().getUserData())
-            && PlayScene.playerFixtureID.equals(contact.getFixtureA().getUserData())) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean collisionIsPlayerWater(Contact contact) {
-        if (PlayScene.waterFixtureID.equals(contact.getFixtureA().getUserData())
-            && PlayScene.playerFixtureID.equals(contact.getFixtureB().getUserData())) {
-            return true;
-        }
-        if (PlayScene.waterFixtureID.equals(contact.getFixtureB().getUserData())
-            && PlayScene.playerFixtureID.equals(contact.getFixtureA().getUserData())) {
+        if (a.equals(contact.getFixtureB().getUserData())
+                && b.equals(contact.getFixtureA().getUserData())) {
             return true;
         }
         return false;

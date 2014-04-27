@@ -79,7 +79,7 @@ public class PlayScene extends Scene<SwanGame> {
                 "Escape to restart",
                 game.getSkin(), "white"
         );
-        instructionsLabel.setPosition(-halfWorldWidth *2, 260);
+        instructionsLabel.setPosition(-halfWorldWidth *2, 230);
         addActor(instructionsLabel);
 
         BodyDef groundBodyDef = new BodyDef();
@@ -180,16 +180,37 @@ public class PlayScene extends Scene<SwanGame> {
         fixtureDef.friction = 0.1f;
         fixtureDef.restitution = 0.6f;
 
-        TextureRegion textureRegion = game.getSkin().getRegion("frog");
+        TextureRegion textureRegion;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        Body body;
+        Entity entity;
+
+        // FROG!
+        textureRegion = game.getSkin().getRegion("frog");
         bodyDef.position.x = x + (width/3f);
         bodyDef.position.y = y;
-
-        Body body = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData(frogFixtureID);
+        entity = new Entity(
+                x, y,
+                new SpriteComponent(
+                        textureRegion,
+                        true, true
+                ),
+                new DecorationController(body),
+                null
+        );
+        entity.setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        addEntity(entity);
 
-        Entity entity = new Entity(
+        // DUCKLING!
+        textureRegion = game.getSkin().getRegion("duckling");
+        bodyDef.position.x = x + (2*width/3f);
+        bodyDef.position.y = y;
+        body = world.createBody(bodyDef);
+        body.createFixture(fixtureDef).setUserData(duckFixtureID);
+        entity = new Entity(
                 x, y,
                 new SpriteComponent(
                         textureRegion,
